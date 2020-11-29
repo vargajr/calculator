@@ -113,15 +113,30 @@ const calculate = () => {
     if (['+', '-', '×', '÷', '.'].indexOf(accumulator[accumulator.length-1]) !== -1) {accumulator.pop();};
     let result = accumulator
     .join('')
-    .replaceAll('-','+-')
+    .replaceAll('e+', 'ep')
     .split('+')
+    .map(elem => elem.replaceAll('ep', 'e+'))
     .map(elem => evaluateForAddition(elem))
     .reduce(additionReducer);
     return result;
 }
 
 const evaluateForAddition = (text) => {
-    if (parseFloat(text).toString().length == text.length) {
+    if (text.indexOf('-')=== -1 && text.indexOf('×')=== -1 && text.indexOf('÷') === -1) {
+        return parseFloat(text);
+    } else {
+        return makeTheSubtr(text);
+    }
+};
+
+const makeTheSubtr = (text) => text
+    .replaceAll('e-', 'em')
+    .split('-')
+    .map(elem =>elem.replaceAll('em', 'e-'))
+    .map(elem => evaluateForSubtr(elem)).reduce(subReducer);
+
+const evaluateForSubtr = (text) => {
+    if (text.indexOf('×')=== -1 && text.indexOf('÷') === -1) {
         return parseFloat(text);
     } else {
         return makeTheMultiplication(text);
@@ -131,7 +146,7 @@ const evaluateForAddition = (text) => {
 const makeTheMultiplication = (text) => text.split('×').map(elem => evaluateForMultiply(elem)).reduce(multiplyReducer);
 
 const evaluateForMultiply = (text) => {
-    if (parseFloat(text).toString().length == text.length) {
+    if (text.indexOf('÷') === -1) {
         return parseFloat(text);
     } else {
         return makeTheDivision(text);
@@ -142,6 +157,7 @@ const makeTheDivision = (text) => text.split('÷').map(elem => parseFloat(elem))
 
 const divisionReducer = (x, y) => x / y;
 const multiplyReducer = (x, y) => x * y;
+const subReducer = (x, y) => x - y;
 const additionReducer = (x, y) => x + y;
 // enter button handler --- end ---
 
