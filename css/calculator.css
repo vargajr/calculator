@@ -32,13 +32,12 @@ body {
 
 .calc-display {
     margin: .3em;
-    padding: .6em;
-    direction: rtl;
+    padding: .6em 2px .6em 0;
+    direction: ltr;
     text-align: right;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    border: solid 1px rgb(200, 200, 200);
+    border: solid 2px rgb(200, 200, 200);
 }
 
 .operators {
@@ -49,10 +48,16 @@ body {
 
 .op-button {
     flex: 1 1 25%;
-    background-color: rgb(200, 200, 200);
     margin: .3em;
-    padding: .3em;
-    border: solid 1px rgb(200, 200, 200);
+}
+
+.op-button > button {
+    background-color: rgb(200, 200, 200);
+    padding: .4em;
+    display: block;
+    width: 100%;
+    border-color:  rgb(200, 200, 200);
+    border-width: 3px;
 }
 
 .keypad {
@@ -63,7 +68,6 @@ body {
 
 .numbers {
     display: flex;
-
     flex-flow: row wrap;
     flex: 0 0 75%;
 }
@@ -71,20 +75,27 @@ body {
 .enter-button {
     flex: 0 1 25%;
     margin: .3em;
-    padding-top: 3.9em;
-    background-color: rgba(50, 150, 255, 0.8);
-    color: #ddd;
-    border: solid 1px rgb(200, 200, 200);
 }
 
-.enter-button:hover {
-    background-color: whie;
+.enter-button > button {
+    background-color: rgba(50, 150, 255, 0.8);
+    color: #ddd;
+    padding: 5.1em 0;
+    display: block;
+    width: 100%;
+    border-width: 3px;
 }
 
 .button {
     flex: 1 1 25%;
     margin: .3em;
-    padding: .3em;
+}
+
+.button > button {
     background-color: rgb(240, 240, 240);
-    border: solid 1px rgb(200, 200, 200);
+    padding: .4em;
+    display: block;
+    width: 100%;
+    border-color: rgb(200, 200, 200);
+    border-width: 3px;
 }
